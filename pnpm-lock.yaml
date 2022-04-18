@@ -46,7 +46,7 @@ importers:
       react-dom: ^17.0.0
       typescript: ^4.6.3
       vite: ^2.9.2
-      vite-plugin-import-dynamic-module: workspace:*
+      vite-plugin-dynamic-import-module: workspace:*
     dependencies:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -58,7 +58,7 @@ importers:
       antd: 4.19.5_react-dom@17.0.2+react@17.0.2
       typescript: 4.6.3
       vite: 2.9.5
-      vite-plugin-import-dynamic-module: link:..
+      vite-plugin-dynamic-import-module: link:..
 
 packages:
 

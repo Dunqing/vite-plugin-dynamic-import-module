@@ -1,11 +1,11 @@
-# vite-plugin-import-dynamic-module
+# vite-plugin-dynamic-import-module
 
 [![NPM version](https://img.shields.io/npm/v/vite-plugin-dynamic-import-module.svg)](https://npmjs.org/package/vite-plugin-dynamic-import-module)
 
 ## Install
 
 ```bash
-pnpm add vite-plugin-import-dynamic-module -D
+pnpm add vite-plugin-dynamic-import-module -D
 ```
 
 ## Usage
@@ -13,7 +13,7 @@ pnpm add vite-plugin-import-dynamic-module -D
 ```typescript
 
 import { defineConfig } from 'vite'
-import importDynamicModule from 'vite-plugin-import-dynamic-module'
+import importDynamicModule from 'vite-plugin-dynamic-import-module'
 
 export default defineConfig({
   plugins: [importDynamicModule()],
@@ -74,6 +74,6 @@ import(`@ant-design/icons/es/icons/${name}`)
 
 ### Thanks
 
-- [@rollup/plugin-import-dynamic-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars)
+- [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars)
 
 [LICENSE (MIT)](/LICENSE)

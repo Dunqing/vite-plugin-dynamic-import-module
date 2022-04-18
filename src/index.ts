@@ -25,7 +25,7 @@ export default function importDynamicModule({ include = [], exclude = [], extens
 
   return {
     enforce: 'post',
-    name: 'vite-plugin-import-dynamic-module',
+    name: 'vite-plugin-dynamic-import-module',
     configResolved(resolved) {
       config = resolved
     },

@@ -1,16 +1,24 @@
 {
-  "name": "vite-plugin-import-dynamic-module",
+  "name": "vite-plugin-dynamic-import-module",
   "version": "0.0.0",
-  "description": "",
+  "description": "dynamic import module",
   "license": "MIT",
   "author": "DengQing <dengqing0821@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dunqing/vite-plugin-import-dynamic-module.git"
+    "url": "git+https://github.com/Dunqing/vite-plugin-dynamic-import-module.git"
   },
+  "keywords": ["dynamic-import", "vite", "plugin", "dynamic-import-module", "dynamic-import-vars", "rollup"],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "files": [
     "dist"
   ],
@@ -24,9 +32,9 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
-  "homepage": "https://github.com/Dunqing/vite-plugin-import-dynamic-module#readme",
+  "homepage": "https://github.com/Dunqing/vite-plugin-dynamic-import-module#readme",
   "bugs": {
-    "url": "https://github.com/Dunqing/vite-plugin-import-dynamic-module/issues"
+    "url": "https://github.com/Dunqing/vite-plugin-dynamic-import-module/issues"
   },
   "dependencies": {
     "estree-walker": "^3.0.1",
