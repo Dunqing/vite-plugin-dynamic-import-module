@@ -45,7 +45,9 @@ export default function importDynamicModule({ include = [], exclude = [], extens
           if (!glob)
             return
 
-          const libId = path.posix.join(...glob.split('\/').filter(i => !i.includes('*')))
+          const libPart: string[] = []
+          glob.split('\/').some(i => !i.includes('*') && libPart.push(i))
+          const libId = path.posix.join(...libPart)
 
           /**
            * @rollup/plugin-dynamic-import-vars handler
@@ -53,22 +55,17 @@ export default function importDynamicModule({ include = [], exclude = [], extens
           if (libId.startsWith('./') || libId.startsWith('../'))
             return
 
-          let moduleId = getModuleId(libId, config)?.src
+          const moduleId = getModuleId(libId, config)?.src || (await this.resolve(libId, id, { skipSelf: true }))?.id
 
-          if (!moduleId) {
-            const resolved = await this.resolve(libId, id, { skipSelf: true })
-            if (!resolved)
-              return
-            moduleId = resolved.id
-          }
-
-          const modulePath = path.posix.dirname(moduleId)
+          if (!moduleId)
+            return
 
           const globExtensions = `.\{${extensions.join(',')}\}`
           const globPattern = glob.substring(libId.length).replace('/', '')
+
           const sources = fastGlob.sync(
             globPattern.includes('.') ? globPattern : `${globPattern}${globExtensions}`,
-            { cwd: modulePath },
+            { cwd: path.posix.dirname(moduleId) },
           )
 
           ms = ms || new MagicString(code)
