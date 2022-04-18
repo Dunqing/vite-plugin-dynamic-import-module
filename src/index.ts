@@ -11,12 +11,12 @@ import { getModuleId } from './helpers'
 interface ImportDynamicModulePluginOptions {
   include?: string | string[]
   exclude?: string | string[]
+  extensions?: string[]
 }
 
-const Extension = ['js', 'cjs', 'ts', 'tsx', 'jsx', 'mjs', 'mts', 'mtsx']
-const filterRe = new RegExp(`\\.(?:${Extension.join('|')})$`)
+export default function importDynamicModule({ include = [], exclude = [], extensions = ['js', 'cjs', 'ts', 'tsx', 'jsx', 'mjs', 'mts', 'mtsx'] }: ImportDynamicModulePluginOptions = {}): Plugin {
+  const filterRe = new RegExp(`\\.(?:${extensions.join('|')})$`)
 
-export default function importDynamicModule({ include = [], exclude = [] }: ImportDynamicModulePluginOptions = {}): Plugin {
   const filter = createFilter([filterRe, include].flat(), exclude)
 
   let config: ResolvedConfig
@@ -45,11 +45,7 @@ export default function importDynamicModule({ include = [], exclude = [] }: Impo
           if (!glob)
             return
 
-          const matched = glob.match(/([\w+\@\_\-\/]+)/)
-          if (matched?.length !== 2)
-            return
-
-          const [fullMatch, libId] = matched
+          const libId = path.posix.join(...glob.split('\/').filter(i => !i.includes('*')))
 
           let moduleId = getModuleId(libId, config)?.src
 
@@ -62,10 +58,15 @@ export default function importDynamicModule({ include = [], exclude = [] }: Impo
 
           const modulePath = path.posix.dirname(moduleId)
 
-          const sources = fastGlob.sync(`${glob.substring(fullMatch.length)}.\{${Extension.join(',')}\}`, {
-            cwd: modulePath,
-          })
-          ms = new MagicString(code)
+          const globExtensions = `.\{${extensions.join(',')}\}`
+          const globPattern = glob.substring(libId.length).replace('/', '')
+          const sources = fastGlob.sync(
+            globPattern.includes('.') ? globPattern : `${globPattern}${globExtensions}`,
+            { cwd: modulePath },
+          )
+
+          ms = ms || new MagicString(code)
+
           ms.prepend(
               `function __variableDynamicImportRuntime${dynamicImportIndex}__(path) {
   switch (path) {
