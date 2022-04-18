@@ -14,7 +14,9 @@ interface ImportDynamicModulePluginOptions {
   extensions?: string[]
 }
 
-export default function importDynamicModule({ include = [], exclude = [], extensions = ['js', 'cjs', 'ts', 'tsx', 'jsx', 'mjs', 'mts', 'mtsx'] }: ImportDynamicModulePluginOptions = {}): Plugin {
+const defaultExtensions = ['js', 'cjs', 'ts', 'tsx', 'jsx', 'mjs', 'mts', 'mtsx']
+
+export default function importDynamicModule({ include = [], exclude = [], extensions = defaultExtensions }: ImportDynamicModulePluginOptions = {}): Plugin {
   const filterRe = new RegExp(`\\.(?:${extensions.join('|')})$`)
 
   const filter = createFilter([filterRe, include].flat(), exclude)
