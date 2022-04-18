@@ -8,6 +8,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
+    "play": "pnpm run --filter ./playground dev",
     "prepublishOnly": "pnpm run build",
     "release": "bumpp --commit --push --tag && pnpm publish",
     "typecheck": "tsc --noEmit"
