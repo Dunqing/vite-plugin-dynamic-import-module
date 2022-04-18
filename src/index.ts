@@ -47,6 +47,12 @@ export default function importDynamicModule({ include = [], exclude = [], extens
 
           const libId = path.posix.join(...glob.split('\/').filter(i => !i.includes('*')))
 
+          /**
+           * @rollup/plugin-dynamic-import-vars handler
+           */
+          if (libId.startsWith('./') || libId.startsWith('../'))
+            return
+
           let moduleId = getModuleId(libId, config)?.src
 
           if (!moduleId) {
