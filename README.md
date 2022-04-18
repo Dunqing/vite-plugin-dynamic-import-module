@@ -2,6 +2,10 @@
 
 [![NPM version](https://img.shields.io/npm/v/vite-plugin-dynamic-import-module.svg)](https://npmjs.org/package/vite-plugin-dynamic-import-module)
 
+
+A vite plugin to support variables in dynamic imports module in Vite
+
+
 ## Install
 
 ```bash
@@ -46,7 +50,7 @@ Default: `['js', 'cjs', 'ts', 'tsx', 'jsx', 'mjs', 'mts', 'mtsx']`
 
 Automatically add default extensions when your import path has no extensions
 
-### How to use?
+### How it works?
 
 ```typescript
 // Allowed
@@ -62,7 +66,7 @@ import(`@ant-design/${module}/${name}`)
 
 ### Limitations
 
-#### module name does not allow variables
+#### module name does not allow use variables
 
 ```typescript
 // module as @ant-design
