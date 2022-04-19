@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs'
+import { existsSync, readFileSync } from 'fs'
 import path from 'path'
 import type { ResolvedConfig } from 'vite'
 import { normalizePath } from 'vite'
@@ -27,6 +27,10 @@ export const getModuleId = (id: string, config: ResolvedConfig) => {
   const depsCacheDir = getDepsCacheDir(config)
 
   const metadataPath = path.join(depsCacheDir, '_metadata.json')
+
+  if (!existsSync(metadataPath))
+    return null
+
   const metadata = parseOptimizedDepsMetadata(
     readFileSync(metadataPath, 'utf-8'),
     depsCacheDir,
