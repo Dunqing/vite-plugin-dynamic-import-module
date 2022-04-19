@@ -35,6 +35,7 @@
     "dev": "tsup --watch",
     "play": "pnpm run --filter ./playground dev",
     "prepublishOnly": "pnpm run build",
+    "test": "vitest",
     "release": "bumpp --commit --push --tag && pnpm publish",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
@@ -44,21 +45,23 @@
     "url": "https://github.com/Dunqing/vite-plugin-dynamic-import-module/issues"
   },
   "dependencies": {
+    "@rollup/pluginutils": "^4.2.1",
     "fast-glob": "^3.2.11",
     "magic-string": "^0.26.1",
     "rollup": "^2.70.2",
-    "@rollup/pluginutils": "^4.2.1",
     "vite": "^2.9.5"
   },
   "devDependencies": {
-    "estree-walker": "^3.0.1",
+    "@ant-design/icons": "^4.7.0",
     "@antfu/eslint-config": "^0.20.6",
     "@types/estree": "^0.0.51",
     "@types/node": "^17.0.24",
     "bumpp": "^7.1.1",
     "eslint": "^8.13.0",
-    "tsup": "^5.12.5",
+    "estree-walker": "^3.0.1",
     "pnpm": "^6.32.8",
-    "typescript": "^4.6.3"
+    "tsup": "^5.12.5",
+    "typescript": "^4.6.3",
+    "vitest": "^0.9.3"
   }
 }
