@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-dynamic-import-module",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "dynamic import module",
   "license": "MIT",
   "author": "DengQing <dengqing0821@gmail.com>",
