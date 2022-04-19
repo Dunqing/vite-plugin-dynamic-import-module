@@ -1,7 +1,7 @@
 import path from 'path'
 import type { Plugin, ResolvedConfig } from 'vite'
 import { createFilter } from '@rollup/pluginutils'
-import { walk } from 'estree-walker'
+import { asyncWalk } from 'estree-walker'
 import type { ImportExpression } from 'estree'
 import MagicString from 'magic-string'
 import fastGlob from 'fast-glob'
@@ -24,12 +24,11 @@ export default function importDynamicModule({ include = [], exclude = [], extens
   let config: ResolvedConfig
 
   return {
-    enforce: 'post',
     name: 'vite-plugin-dynamic-import-module',
     configResolved(resolved) {
       config = resolved
     },
-    transform(code, id) {
+    async transform(code, id) {
       if (!filter(id))
         return null
       const parsed = this.parse(code)
@@ -37,7 +36,7 @@ export default function importDynamicModule({ include = [], exclude = [], extens
       let ms: MagicString
       let dynamicImportIndex = -1
 
-      walk(parsed, {
+      await asyncWalk(parsed, {
         enter: async(node) => {
           if (node.type !== 'ImportExpression')
             return
@@ -83,6 +82,7 @@ ${`    default: return new Promise(function(resolve, reject) {
     })\n`}   }
  }\n\n`,
           )
+
           ms.overwrite((node as any).start, (node as any).start + 6, `__variableDynamicImportRuntime${dynamicImportIndex}__`)
         },
       })
