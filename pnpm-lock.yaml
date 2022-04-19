@@ -20,7 +20,6 @@ importers:
       vite: ^2.9.5
     dependencies:
       '@rollup/pluginutils': 4.2.1
-      estree-walker: 3.0.1
       fast-glob: 3.2.11
       magic-string: 0.26.1
       rollup: 2.70.2
@@ -31,6 +30,7 @@ importers:
       '@types/node': 17.0.24
       bumpp: 7.1.1
       eslint: 8.13.0
+      estree-walker: 3.0.1
       pnpm: 6.32.8
       tsup: 5.12.5_typescript@4.6.3
       typescript: 4.6.3
@@ -1811,7 +1811,7 @@ packages:
 
   /estree-walker/3.0.1:
     resolution: {integrity: sha512-woY0RUD87WzMBUiZLx8NsYr23N5BKsOMZHhu2hoNRVh6NXGfoiT1KOL8G3UHlJAnEDGmfa5ubNA/AacfG+Kb0g==}
-    dev: false
+    dev: true
 
   /esutils/2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}

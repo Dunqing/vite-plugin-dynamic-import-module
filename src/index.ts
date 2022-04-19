@@ -47,15 +47,15 @@ export default function importDynamicModule({ include = [], exclude = [], extens
           if (!glob)
             return
 
-          const libPart: string[] = []
-          glob.split('\/').some(i => !i.includes('*') && libPart.push(i))
-          const libId = path.posix.join(...libPart)
-
           /**
-           * @rollup/plugin-dynamic-import-vars handler
-           */
-          if (libId.startsWith('./') || libId.startsWith('../'))
+             * @rollup/plugin-dynamic-import-vars handler
+             */
+          if (glob.startsWith('./') || glob.startsWith('../'))
             return
+
+          const libPart: string[] = []
+          glob.split('\/').every(i => i.includes('*') || libPart.push(i))
+          const libId = path.posix.join(...libPart)
 
           const moduleId = getModuleId(libId, config)?.src || (await this.resolve(libId, id, { skipSelf: true }))?.id
 
