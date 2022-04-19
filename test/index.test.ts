@@ -21,21 +21,16 @@ const buildVite = async() => {
 describe('should', () => {
   it('found module work', async() => {
     const result = await buildVite()
-    expect(((result as any).output).map((o: any) => o.facadeModuleId)).toMatchInlineSnapshot(`
-      [
-        "/Users/dengqing/Documents/github/vite-plugin-import-dynamic-module/test/index.html",
-        "/Users/dengqing/Documents/github/vite-plugin-import-dynamic-module/node_modules/.pnpm/@ant-design+icons@4.7.0/node_modules/@ant-design/icons/es/icons/GithubFilled.js",
-        null,
-        "/Users/dengqing/Documents/github/vite-plugin-import-dynamic-module/node_modules/.pnpm/@ant-design+icons@4.7.0/node_modules/@ant-design/icons/es/icons/GithubOutlined.js",
-        undefined,
-      ]
-    `)
+    expect(((result as any).output)
+      .map((o: any) => o.facadeModuleId)).toHaveLength(5)
   })
 
   it('build work', async() => {
     const result: any = await buildVite()
-    result.output.forEach((o) => {
-      expect(o.code).toMatchSnapshot()
-    })
+    const code = result.output.map((o: any) => o.code).join('\n')
+    expect(code).toContain('__variableDynamicImportRuntime0__')
+    expect(code).toContain('GithubOutlined')
+    expect(code).toContain('GithubFilled')
+    expect(code).not.toContain('import(`@ant-design/icons/es/icons`)')
   })
 })
