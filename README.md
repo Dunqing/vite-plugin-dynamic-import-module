@@ -50,7 +50,7 @@ Default: `['js', 'cjs', 'ts', 'tsx', 'jsx', 'mjs', 'mts', 'mtsx']`
 
 Automatically add default extensions when your import path has no extensions
 
-### How it works?
+## How it works?
 
 ```typescript
 // Allowed
@@ -64,9 +64,9 @@ import(`@ant-design/icons/${name}Outlined.js`)
 import(`@ant-design/${module}/${name}`)
 ```
 
-### Limitations
+## Limitations
 
-#### module name does not allow use variables
+### module name does not allow use variables
 
 ```typescript
 // module as @ant-design
@@ -76,7 +76,11 @@ import(`@ant-design/${module}${name}`)
 import(`@ant-design/icons/es/icons/${name}`)
 ```
 
-### Thanks
+## Examples
+
+- [vite-ant-design-pro](https://github.com/Dunqing/vite-ant-design-pro)
+
+## Thanks
 
 - [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars)
 
