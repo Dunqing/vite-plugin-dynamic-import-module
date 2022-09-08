@@ -6,7 +6,7 @@
 A vite plugin to support variables in dynamic imports module in Vite
 
 
-## Install
+## Installation
 
 ```bash
 pnpm add vite-plugin-dynamic-import-module -D
